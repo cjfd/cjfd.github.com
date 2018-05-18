@@ -1,74 +1,80 @@
 <template>
-    <div class="table">
-        <div class="crumbs">
-            <el-breadcrumb separator="/">
-                <el-breadcrumb-item>
-                    <i class="el-icon-tickets"></i> 基础表格</el-breadcrumb-item>
-            </el-breadcrumb>
-        </div>
-        <div class="container">
-            <div class="handle-box">
-
-                <el-select v-model="selectProvince" placeholder="筛选省份" class="handle-select mr10">
-                    <el-option key="1" label="广东省" value="广东省"></el-option>
-                    <el-option key="2" label="湖南省" value="湖南省"></el-option>
-                </el-select>
-                <el-input v-model="selectKeyWord" placeholder="筛选关键词" class="handle-input mr10"></el-input>
-                <el-button type="primary" icon="search" @click="search">搜索</el-button>
-            </div>
-            <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
-                <el-table-column type="selection" width="55"></el-table-column>
-                <el-table-column prop="date" label="日期" sortable width="150">
-                </el-table-column>
-                <el-table-column prop="name" label="姓名" width="120">
-                </el-table-column>
-                <el-table-column prop="address" label="地址" :formatter="formatter">
-                </el-table-column>
-                <el-table-column label="操作" width="180">
-                    <template slot-scope="scope">
-                        <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                        <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-            <div class="delAll">
-                <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
-            </div>
-            <div class="pagination">
-                <el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="1000">
-                </el-pagination>
-            </div>
-        </div>
-
-        <!-- 编辑弹出框 -->
-        <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
-            <el-form ref="form" :model="form" label-width="50px">
-                <el-form-item label="日期">
-                    <el-date-picker type="date" placeholder="选择日期" v-model="form.date" value-format="yyyy-MM-dd" style="width: 100%;"></el-date-picker>
-                </el-form-item>
-                <el-form-item label="姓名">
-                    <el-input v-model="form.name"></el-input>
-                </el-form-item>
-                <el-form-item label="地址">
-                    <el-input v-model="form.address"></el-input>
-                </el-form-item>
-
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveEdit">确 定</el-button>
-            </span>
-        </el-dialog>
-
-        <!-- 删除提示框 -->
-        <el-dialog title="提示" :visible.sync="delVisible" width="300px" center>
-            <div class="del-dialog-cnt">删除不可恢复，是否确定删除？</div>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="delVisible = false">取 消</el-button>
-                <el-button type="primary" @click="deleteRow">确 定</el-button>
-            </span>
-        </el-dialog>
+  <div class="table">
+    <div class="crumbs">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item>
+          <i class="el-icon-tickets"></i> 基础表格</el-breadcrumb-item>
+      </el-breadcrumb>
     </div>
+    <div class="container">
+      <div class="handle-box">
+
+        <el-select v-model="selectProvince" placeholder="请选择省份" class="handle-select mr10">
+          <el-option key="1" label=广东省 value="广东省"></el-option>
+          <el-option key="2" label="湖南省" value="湖南省"></el-option>
+        </el-select>
+        <el-input v-model="selectKeyWord" placeholder="筛选关键词" class="handle-input mr10"></el-input>
+        <el-button type="primary" icon="search" @click="search">搜索</el-button>
+        <el-button type="primary" icon="search" @click="addUser">添加</el-button>
+      </div>
+
+      <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
+        <el-table-column type="selection" width="55"></el-table-column>
+        <el-table-column prop="name" label="姓名" sortable width="150">
+        </el-table-column>
+        <el-table-column prop="age" label="年龄" sortable width="150">
+        </el-table-column>
+        <el-table-column prop="address" label="地址" :formatter="formatter">
+        </el-table-column>
+        <el-table-column prop="email" label="邮箱" width="200">
+        </el-table-column>
+        <el-table-column label="操作" width="180">
+          <template slot-scope="scope">
+            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="delAll">
+        <el-button type="primary" icon="delete" class="handle-del" @click="delAll">批量删除</el-button>
+      </div>
+      <div class="pagination">
+        <el-pagination @current-change="handleCurrentChange" layout="prev, pager, next" :total="1000">
+        </el-pagination>
+      </div>
+    </div>
+
+    <!-- 编辑弹出框 -->
+    <el-dialog :title="this.isAdd?'新增':'编辑'" :visible.sync="editVisible" width="30%">
+      <el-form ref="form" :model="form" label-width="50px">
+        <el-form-item label="姓名">
+          <el-input type="name" v-model="form.name"></el-input>
+        </el-form-item>
+        <el-form-item label="年龄">
+          <el-input v-model="form.age"></el-input>
+        </el-form-item>
+        <el-form-item label="地址">
+          <el-input v-model="form.address"></el-input>
+        </el-form-item>
+        <el-form-item label="邮箱">
+          <el-input v-model="form.email"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="editVisible = false">取 消</el-button>
+        <el-button type="primary" @click="saveEdit">确 定</el-button>
+      </span>
+    </el-dialog>
+
+    <!-- 删除提示框 -->
+    <el-dialog title="提示" :visible.sync="delVisible" width="400px">
+      <div class="del-dialog-cnt">是否确定删除？</div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="delVisible = false">取 消</el-button>
+        <el-button type="primary" @click="deleteRow">确 定</el-button>
+      </span>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -83,12 +89,14 @@ export default {
       selectKeyWord: "",
       delList: [],
       isSearch: false,
+      isAdd:false,
       editVisible: false,
       delVisible: false,
       form: {
         name: "",
-        date: "",
-        address: ""
+        age: "",
+        address: "",
+        email: ""
       },
       rowId: -1
     };
@@ -124,10 +132,10 @@ export default {
       this.curPage = val;
       this.getData();
     },
-    // 获取 easy-mock 的模拟数据
+    // 获取easy mock数据
     getData() {
       this.$axios
-        .post(this.url, {
+        .get(this.url, {
           page: this.curPage
         })
         .then(res => {
@@ -140,16 +148,14 @@ export default {
     formatter(row, column) {
       return row.address;
     },
-    filterTag(value, row) {
-      return row.tag === value;
-    },
     handleEdit(index, row) {
       this.rowId = index;
       const item = this.tableData[index];
       this.form = {
         name: item.name,
-        date: item.date,
-        address: item.address
+        age: item.age,
+        address: item.address,
+        email: item.email
       };
       this.editVisible = true;
     },
@@ -161,6 +167,10 @@ export default {
       const length = this.multipleSelection.length;
       let str = "";
       this.delList = this.delList.concat(this.multipleSelection);
+      if(!length){
+        this.$message.error('请先勾选要删除的数据！');
+        return ;
+      }
       for (let i = 0; i < length; i++) {
         str += this.multipleSelection[i].name + " ";
       }
@@ -174,13 +184,27 @@ export default {
     saveEdit() {
       this.$set(this.tableData, this.rowId, this.form);
       this.editVisible = false;
+      if(!this.isAdd){
       this.$message.success(`修改第 ${this.rowId + 1} 行成功`);
+      }else{
+         this.$message.success('数据添加成功');
+      }
     },
     // 确定删除
     deleteRow() {
       this.tableData.splice(this.rowId, 1);
       this.$message.success("删除成功");
       this.delVisible = false;
+    },
+    addUser(){
+      this.isAdd=true;
+      this.editVisible = true;
+      this.tableData.shift({
+        name:this.form.name,
+        age:this.form.age,
+        address:this.form.address,
+        email:this.form.email
+      })
     }
   }
 };
