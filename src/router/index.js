@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 Vue.use(Router);
-
+// 路由懒加载
 const home = resolve => require(['../components/common/Home.vue'], resolve)
 const dashboard = resolve => require(['../components/page/Dashboard.vue'], resolve)
 const table = resolve => require(['../components/page/BaseTable.vue'], resolve)

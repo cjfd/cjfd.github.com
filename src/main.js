@@ -4,17 +4,18 @@ import router from './router';
 import axios from 'axios';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
-// import '../static/css/theme-green/index.css';       // 浅绿色主题
 import "babel-polyfill";
-// charts
+//use v-charts
 import VeLine from 'v-charts/lib/line';
 import VeMap from 'v-charts/lib/map';
 import VeHistogram from 'v-charts/lib/histogram';
 Vue.component(VeLine.name, VeLine);
 Vue.component(VeMap.name,VeMap)
 Vue.component(VeHistogram.name,VeHistogram)
+// charts end
  
 Vue.use(ElementUI, { size: 'small' });
+
 Vue.prototype.$axios = axios;
 
 //使用钩子函数对路由进行权限跳转
