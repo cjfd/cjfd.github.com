@@ -1,10 +1,10 @@
 <template>
     <div class="header">
-        <!-- <div class="manage-title">后台管理系统</div> -->
          <!-- 折叠按钮 -->
          <div class="collapse-btn" @click="collapseChage">
             <i class="el-icon-menu"></i>
         </div>
+        <breadcrumb class="breadcrumb-container"></breadcrumb>
         <div class="header-right">
             <div class="header-user-con">
                 <!-- 全屏显示 -->
@@ -30,6 +30,7 @@
 </template>
 <script>
     import bus from '../common/bus';
+    import breadcrumb from '../common/Breadcrumb.vue';
     export default {
         data() {
             return {
@@ -84,6 +85,9 @@
                 }
                 this.fullscreen = !this.fullscreen;
             }
+        },
+        components:{
+            breadcrumb
         }
     }
 </script>
@@ -95,6 +99,8 @@
         height: 70px;
         font-size: 22px;
         color: #fff;
+        /* background-color: #fff;
+        border-bottom: 1px solid gray; */
     }
     .collapse-btn{
         float: left;
