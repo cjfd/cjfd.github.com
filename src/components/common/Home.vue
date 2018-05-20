@@ -1,6 +1,5 @@
 <template>
     <div class="wrapper">
-        
         <v-sidebar></v-sidebar>
         <div class="content-box" :class="{'content-collapse':collapse}">
             <v-head></v-head>
