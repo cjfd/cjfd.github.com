@@ -20,16 +20,17 @@ const error403 = resolve => require(['../components/page/403.vue'], resolve)
 
 export default new Router({
     routes: [
+        // {
+        //     path: '/',
+        //     name: '首页',
+        //     redirect: '/dashboard'
+        // },
         {
-            path: '/',
-            name: '首页',
-            redirect: '/dashboard'
-        },
-        {
-            path: '/',
+            path: '',
             component: home,
-            name: 'home',
-            meta: { title: 'home' },
+            // name: 'home',
+            // meta: { title: 'home' },
+            redirect: 'dashboard',
             children: [
                 {
                     path: '/dashboard',
@@ -92,6 +93,7 @@ export default new Router({
                 }
             ]
         },
+       
         {
             path: '/login',
             component: login,
