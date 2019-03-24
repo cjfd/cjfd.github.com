@@ -23,18 +23,10 @@
 	|           |-- Sidebar.vue          // 公共左边栏
 	|           |-- Tags.vue           	 // 页面切换标签组件
 	|       |-- page                   	 // 主要路由页面
-	|           |-- 403.vue
-	|           |-- 404.vue
-	|           |-- BaseCharts.vue       // 基础图表
-	|           |-- BaseForm.vue         // 基础表单
-	|           |-- BaseTable.vue        // 基础表格
-	|           |-- DashBoard.vue        // 系统首页
-	|           |-- DragList.vue         // 拖拽列表组件
+	| 
 	|           |-- Login.vue          	 // 登录
-	|           |-- Markdown.vue         // markdown组件
-	|           |-- Premission.vue       // 权限测试组件
-	|           |-- Upload.vue           // 图片上传
-	|           |-- VueEditor.vue        // 富文本编辑器
+                 .....
+	|         
 	|   |-- App.vue                      // 页面入口文件
 	|   |-- main.js                      // 程序入口文件，加载各种公共组件
 	|-- .babelrc                         // ES6语法编译配置
