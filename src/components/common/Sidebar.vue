@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import bus from "../common/bus";
+    import bus from "../common/bus";
 export default {
   data() {
     return {
@@ -38,52 +38,100 @@ export default {
         },
         {
           icon: "el-icon-tickets",
-          index: "table",
-          title: "基础表格"
-        },
-        {
-          icon: "el-icon-message",
-          index: "tabs",
-          title: "tab选项卡"
+          index: "1",
+          title: "个人资料",
+            subs:[
+               {
+                   index:"table",
+                   title:"贫困人员资料查询"
+               }
+            ]
         },
         {
           icon: "el-icon-date",
-          index: "3",
-          title: "表单相关",
+          index: "2",
+          title: "贫困人员申请",
           subs: [
-            {
-              index: "form",
-              title: "基本表单"
-            },
-            {
-              index: "editor",
-              title: "富文本编辑器"
-            },
-            {
-              index: "markdown",
-              title: "markdown编辑器"
-            },
-            {
-              index: "upload",
-              title: "文件上传"
-            }
+              {
+                  index: "identity_verify",
+                  title: "身份审核"
+              },
+              {
+                  index: "fund_application",
+                  title: "资金申请"
+              }
+              // {
+              //     index: "editor",
+              //     title: "富文本编辑器"
+              // },
+              // {
+              //     index: "markdown",
+              //     title: "markdown编辑器"
+              // },
+              // {
+              //     index: "upload",
+              //     title: "文件上传"
+              // }
           ]
         },
-        {
-          icon: "el-icon-rank",
-          index: "drag",
-          title: "拖拽列表"
-        },
-        {
-          icon: "el-icon-warning",
-          index: "permission",
-          title: "权限测试"
-        },
-        {
-          icon: "el-icon-error",
-          index: "404",
-          title: "404页面"
-        }
+          {
+              icon: "el-icon-date",
+              index: "3",
+              title: "申请记录",
+              subs: [
+                  {
+                      index: "s_identity_check",
+                      title: "身份审核记录"
+                  },
+                  {
+                      index: "s_money_apply",
+                      title: "资金申请记录"
+                  }
+              ]
+          },
+          {
+              icon: "el-icon-date",
+              index: "4",
+              title: "村委",
+              subs: [
+                  {
+                      index: "c_identity_perfect",
+                      title: "身份完善"
+                  },
+                  {
+                      index: "c_identity_check",
+                      title: "身份审核"
+                  },
+                  {
+                      index: "c_money_check",
+                      title: "资金审批"
+                  },
+                  {
+                      index: "c_poor_people",
+                      title: "贫困人员"
+                  }
+              ]
+          },
+          // {
+          //     icon: "el-icon-message",
+          //     index: "tabs",
+          //     title: "tab选项卡"
+          // },
+        // {
+        //   icon: "el-icon-rank",
+        //   index: "drag",
+        //   title: "拖拽列表"
+        // },
+        // {
+        //   icon: "el-icon-warning",
+        //   index: "permission",
+        //   title: "权限测试"
+        // },
+        // {
+        //   icon: "el-icon-error",
+        //   index: "404",
+        //   title: "404页面"
+        // }
       ]
     };
   },

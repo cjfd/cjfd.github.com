@@ -26,9 +26,13 @@ export default {
     };
   },
   computed: {
-    role() {
-      return this.name === "admin" ? "超级管理员" : "普通用户";
-    }
+      role() {
+        return this.name === "admin" ? "超级管理员" : "普通用户";
+      },
+      user(){
+          //因为在main.js中已经全局注册了store，所以这里直接用this.$直接使用。
+          return this.$store.state.user
+      }
   },
   created() {
     //   折线图

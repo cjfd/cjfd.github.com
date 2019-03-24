@@ -1,3 +1,5 @@
+
+
 <template>
     <div class="login-wrap">
         <div class="ms-title">后台管理系统</div>
@@ -12,7 +14,7 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
                 </div>
-                <p style="font-size:12px;line-height:30px;color:#999;">Tips : 用户名和密码随便填。</p>
+
             </el-form>
         </div>
     </div>
@@ -22,9 +24,11 @@
     export default {
         data: function(){
             return {
+                userLogin:false,
+                errorInfo : false,
                 ruleForm: {
-                    username: 'admin',
-                    password: '123123'
+                    username: '',
+                    password: ''
                 },
                 rules: {
                     username: [
@@ -36,12 +40,35 @@
                 }
             }
         },
+        computed: {
+            user() {
+                return this.$store.state.user
+            }
+        },
         methods: {
             submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
+                const self = this;
+                self.$refs[formName].validate((valid) => {
                     if (valid) {
-                        localStorage.setItem('ms_username',this.ruleForm.username);
-                        this.$router.push('/');
+                        localStorage.setItem('ms_username',self.ruleForm.name);
+                        localStorage.setItem('ms_user',JSON.stringify(self.ruleForm));
+                        // console.log(JSON.stringify(self.ruleForm));
+                        self.$http.post('/api/user/login',JSON.stringify(self.ruleForm))
+                            .then((response) => {
+                                console.log(response);
+                                if (response.data == -1) {
+                                    self.errorInfo = true;
+                                    self.errInfo = '该用户不存在';
+                                    console.log('该用户不存在')
+                                } else if (response.data == 0) {
+                                    console.log('密码错误')
+                                    self.errorInfo = true;
+                                    self.errInfo = '密码错误';
+                                } else  {
+                                    this.$store.commit('isLogin',response.body[0]);
+                                    self.$router.push('/dashboard');
+                                }
+                            })
                     } else {
                         console.log('error submit!!');
                         return false;
