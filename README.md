@@ -1,27 +1,13 @@
-# Vue Manage #
+# 链链扶贫 #
 基于Vue.js 2.x系列 + Element UI 的后台管理系统解决方案。
 
 ## 简介 ##
-由于公司PC端部分业务线是基于Vue+Element UI组件库来开发的，所以想利用Vue全家桶技术栈和element搭建一套成熟的中后台系统框架,以便于后期快速完成项目开发。
+本套系统旨在用区块链技术解决扶贫相关问题，这只是网站部分的代码，区块链部分尚未上传。
 
 目前该项目只是完成了一些常用功能，后期会不断地去完善。
 
 
-## 功能 ##
-- [x] Element UI
-- [x] 登录/注销
-- [x] Dashboard
-- [x] 表格
-- [x] Tab选项卡
-- [x] 表单
-- [x] 富文本编辑器
-- [x] markdown编辑器
-- [x] 图片拖拽/裁剪上传
-- [x] 列表拖拽排序
-- [x] 权限测试
-- [x] 404 
-- [ ] vuex
-- [x] axios
+
 
 
 ## 目录结构介绍 ##
@@ -61,7 +47,7 @@
 
 ## 安装步骤 ##
 
-	git clone https://github.com/Aaronwn/vue-admin.git   // 把模板下载到本地
+	git clone ...  // 把模板下载到本地
 	cd vue-manage    // 进入模板目录
 	npm install         // 安装项目依赖，等待安装完成之后
 
